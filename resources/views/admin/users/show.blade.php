@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('content')
     <h1 class="text-center p-3">Tashkilot haqida ma'lumot</h1>
   <div class="row">

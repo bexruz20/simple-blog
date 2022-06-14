@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,5 +33,13 @@ Route::get('view', function () {
     return view('post/index');
 });
 
-Route::resource('users',UsersController::class);
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('login', [\App\Http\Controllers\Admin\LoginController::class, 'index'])->name('admin.login');
+    Route::post('create', [\App\Http\Controllers\Admin\LoginController::class, 'create'])->name('admin.create');
+});
+
+
+Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
+    Route::resource('users',UsersController::class);
+});
 
